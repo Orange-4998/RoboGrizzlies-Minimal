@@ -80,14 +80,16 @@ public class eocvTeamProp extends OpenCvPipeline {
         return new int[] {r,g,b};
     }
     public boolean mae(double[] l, Telemetry telemetry) {
-        double[] red = {255, 0, 0};
-       // telemetry.addData("color", "" + l[0]);
-        //double[] blue = {0,0,255};
-        if (l[0] <= 255 && l[0] >= 180 && l[1] <= 120 && l[1] >= 0 && l[2] <= 120 && l[2] >= 0)
+        l = RGBtoHSV(l[0], l[1],l[2]);
+        double[] red = {0, 100, 100};
+        telemetry.addData("color", "" + l[0]);
+
+        if (l[0] <= 30 && l[0] >= 0)
         {
-            //telemetry.addData("color", "red" );
+            telemetry.addData("color", "red" );
             return true;
         }
+
         return false;
     }
     @Override
